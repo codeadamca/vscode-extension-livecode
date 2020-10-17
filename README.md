@@ -4,7 +4,7 @@ A basic Visual Studio Code extension that allows other programmers to foolow alo
 
 ## Tutorial Requirements:
 
-* [Visual Studio Code](https://code.visualstudio.com/) or [Brackets](http://brackets.io/) (or any code editor)
+* [Visual Studio Code](https://code.visualstudio.com/)
 
 Full tutorial URL: https://codeadam.ca/learning/cscode-extension-livecode.html
 
