@@ -10,11 +10,22 @@
 		"Other"
 	],
 	"activationEvents": [
-		"*"
+		"*",
+		"onCommand:livecode.activate",
+		"onCommand:livecode.deactivate"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": []
+		"commands": [
+			{
+				"command": "livecode.activate",
+				"title": "LiveCode: Activate"
+			},
+			{
+				"command": "livecode.deactivate",
+				"title": "LiveCode: Deactivate"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

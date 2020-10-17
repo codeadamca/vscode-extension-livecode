@@ -1,35 +1,35 @@
 import fetch from 'node-fetch';
 import * as vscode from 'vscode';
 
-/*
-export function activate(context: vscode.ExtensionContext) {
+let livecodeStatus = "Off";
 
-	let disposable = vscode.commands.registerCommand('livecode.update', async () => {
+const status = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
 
-		const editor = vscode.window.activeTextEditor;
+export function activate({ subscriptions }: vscode.ExtensionContext) {
 
-		if (!editor)
-		{
-			vscode.window.showInformationMessage("Editor does not exist");
-			return;
-		}
+	status.text = "$(sync-ignored) LiveCode";
+	status.color = "#fff";
+	status.show();
 
-		const path = editor.document.uri.path;
-		const content = editor.document.getText();
+	let livecodeOn = vscode.commands.registerCommand('livecode.activate', async () => {
 
-		const api = "http://livecode.codeadam.ca/api.php";
-
-		const response = await fetch(api + "?path=" + path + "&content=" + content);
-
-		vscode.window.showInformationMessage("LiveCode has been updated!");
+		status.text = "$(sync) LiveCode";
+		livecodeStatus = "On";
+		vscode.window.showInformationMessage("LiveCode Message: LIveCode has been activated! ");
 
 	});
 
-	context.subscriptions.push(disposable);
-}
-*/
+	subscriptions.push(livecodeOn);
 
-export function activate({ subscriptions }: vscode.ExtensionContext) {
+	let livecodeOff = vscode.commands.registerCommand('livecode.deactivate', async () => {
+
+		status.text = "$(sync-ignored) LiveCode";
+		livecodeStatus = "Off";
+		vscode.window.showInformationMessage("LiveCode Message: LiveCode has been deactivated! ");
+
+	});
+
+	subscriptions.push(livecodeOff);
 
 	subscriptions.push(vscode.workspace.onDidSaveTextDocument(updateLiveCode));
 
@@ -37,22 +37,30 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 
 async function updateLiveCode() {
 	
-	const editor = vscode.window.activeTextEditor;
+	if (livecodeStatus == "On")
+	{	
 
-	if (!editor)
-	{
-		vscode.window.showInformationMessage("Editor does not exist");
-		return;
+		status.text = "$(sync~spin) LiveCode";
+
+		const editor = vscode.window.activeTextEditor;
+
+		if (!editor)
+		{
+			vscode.window.showInformationMessage("LiveCode Error: Editor does not exist");
+			return;
+		}
+
+		const path = editor.document.uri.path;
+		const content = editor.document.getText();
+		const api = "http://livecode.codeadam.ca/api.php";
+
+		await fetch(api + "?path=" + path + "&content=" + content);
+
+		vscode.window.showInformationMessage("LiveCode Message: Code has been updated!");
+
+		status.text = "$(sync) LiveCode";
+
 	}
-
-	const path = editor.document.uri.path;
-	const content = editor.document.getText();
-
-	const api = "http://livecode.codeadam.ca/api.php";
-
-	const response = await fetch(api + "?path=" + path + "&content=" + content);
-
-	vscode.window.showInformationMessage("LiveCode has been updated!");
 
 }
 
