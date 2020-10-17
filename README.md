@@ -6,7 +6,7 @@ A basic Visual Studio Code extension that allows other programmers to foolow alo
 
 * [Visual Studio Code](https://code.visualstudio.com/)
 
-Full tutorial URL: https://codeadam.ca/learning/cscode-extension-livecode.html
+Full tutorial URL: https://codeadam.ca/learning/cscode-livecode.html
 
 <a href="https://codeadam.ca">
 <img src="https://codeadam.ca/images/code-block.png" width="100">
