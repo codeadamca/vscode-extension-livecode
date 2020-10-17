@@ -15,7 +15,7 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 
 		status.text = "$(sync) LiveCode";
 		livecodeStatus = "On";
-		vscode.window.showInformationMessage("LiveCode Message: LIveCode has been activated! ");
+		vscode.window.showInformationMessage("LiveCode Message: LiveCode has been activated! ");
 
 	});
 
