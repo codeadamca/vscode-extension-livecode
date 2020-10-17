@@ -10,16 +10,11 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:livecode.update"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "livecode.update",
-				"title": "LiveCode: Update"
-			}
-		]
+		"commands": []
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
