@@ -31,11 +31,38 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 
 	subscriptions.push(livecodeOff);
 
-	subscriptions.push(vscode.workspace.onDidSaveTextDocument(updateLiveCode));
+	let livecodeReset = vscode.commands.registerCommand('livecode.reset', async () => {
+
+		resetLivecode();
+
+	});
+
+	subscriptions.push(livecodeReset);
+
+	subscriptions.push(vscode.workspace.onDidSaveTextDocument(updateLivecode));
 
 }
 
-async function updateLiveCode() {
+async function resetLivecode() {
+
+	status.text = "$(sync~spin) LiveCode";
+	
+	const api = "https://livecode.codeadam.ca/api.php?reset";
+
+	await fetch(api);
+
+	vscode.window.showInformationMessage("LiveCode Message: Paths have been reset!");
+
+	if (livecodeStatus == "On")
+	{
+		status.text = "$(sync) LiveCode";
+	} else {
+		status.text = "$(sync-ignored) LiveCode";
+	}
+
+}
+
+async function updateLivecode() {
 	
 	if (livecodeStatus == "On")
 	{	
@@ -52,11 +79,19 @@ async function updateLiveCode() {
 
 		const path = editor.document.uri.path;
 		const content = editor.document.getText();
-		const api = "http://livecode.codeadam.ca/api.php";
+		const api = "https://livecode.codeadam.ca/api.php";
 
-		await fetch(api + "?path=" + path + "&content=" + content);
+		const headers = {"Content-Type": "application/json"};
+		const body = JSON.stringify({
+			"path": path,
+			"content": content
+		  });
+		  
 
-		vscode.window.showInformationMessage("LiveCode Message: Code has been updated!");
+		let response = await fetch(api, {method: 'POST', headers: headers, body: body});
+		const data = await response.json();
+
+		vscode.window.showInformationMessage("LiveCode Message: Code has been updated!" + JSON.stringify(data));
 
 		status.text = "$(sync) LiveCode";
 
