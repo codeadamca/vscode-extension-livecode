@@ -1,6 +1,6 @@
 # vscode-extension-livecode
 
-A basic Visual Studio Code extension that allows other programmers to foolow along as I code. This extension pushes all saved code changes to [LiveCode](http://livecode.codeadam.ca/) for a period of one hour.
+A basic Visual Studio Code extension that allows other programmers to follow along as I code. This extension pushes all saved code changes to [LiveCode](https://livecode.codeadam.ca/). Files are made available i plain tet for easy reading and copying and pasting during streaming.
 
 ## Tutorial Requirements:
 
