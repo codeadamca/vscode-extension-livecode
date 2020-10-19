@@ -91,7 +91,7 @@ async function updateLivecode() {
 		let response = await fetch(api, {method: 'POST', headers: headers, body: body});
 		const data = await response.json();
 
-		vscode.window.showInformationMessage("LiveCode Message: Code has been updated!" + JSON.stringify(data));
+		vscode.window.showInformationMessage("LiveCode Message: Code has been updated!");
 
 		status.text = "$(sync) LiveCode";
 
