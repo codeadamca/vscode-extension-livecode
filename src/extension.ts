@@ -1,3 +1,5 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED='0'
+
 import fetch from 'node-fetch';
 import * as vscode from 'vscode';
 
