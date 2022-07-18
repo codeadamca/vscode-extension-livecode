@@ -1,4 +1,4 @@
-# vscode-extension-livecode
+# VSCode LiveCode Extension
 
 A basic Visual Studio Code extension that allows other programmers to follow along as I code. 
 
