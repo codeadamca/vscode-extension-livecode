@@ -17,7 +17,7 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 
 		status.text = "$(sync) LiveCode";
 		livecodeStatus = "On";
-		vscode.window.showInformationMessage("LiveCode Message: LiveCode has been activated! " + test);
+		vscode.window.showInformationMessage("LiveCode: LiveCode has been activated! " + test);
 
 	});
 
@@ -27,7 +27,7 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 
 		status.text = "$(sync-ignored) LiveCode";
 		livecodeStatus = "Off";
-		vscode.window.showInformationMessage("LiveCode Message: LiveCode has been deactivated! ");
+		vscode.window.showInformationMessage("LiveCode: LiveCode has been deactivated! ");
 
 	});
 
@@ -53,7 +53,7 @@ async function resetLivecode() {
 
 	await fetch(api);
 
-	vscode.window.showInformationMessage("LiveCode Message: Paths have been reset!");
+	vscode.window.showInformationMessage("LiveCode: Paths have been reset!");
 
 	if (livecodeStatus == "On")
 	{
@@ -75,13 +75,13 @@ async function updateLivecode() {
 
 		if (!editor)
 		{
-			vscode.window.showInformationMessage("LiveCode Error: Editor does not exist");
+			vscode.window.showInformationMessage("LiveCode: Error: Editor does not exist");
 			return;
 		}
 
 		const path = editor.document.uri.path;
 		const content = editor.document.getText();
-		const api = "https://livecode.codeadam.ca/api.php";
+		const api = "https://console.codeadam.ca/api/livecode/";
 
 		const headers = {"Content-Type": "application/json"};
 		const body = JSON.stringify({
@@ -94,7 +94,7 @@ async function updateLivecode() {
 		let response = await fetch(api, {method: 'POST', headers: headers, body: body});
 		const data = await response.json();
 
-		vscode.window.showInformationMessage("LiveCode Message: Code has been updated!");
+		vscode.window.showInformationMessage("LiveCode: Code has been updated!");
 
 		status.text = "$(sync) LiveCode";
 
