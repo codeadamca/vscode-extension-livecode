@@ -4,7 +4,7 @@
 	"icon": "icon-livecode.png",
 	"displayName": "LiveCode",
 	"description": "Allow other programmers to follow along without the use of an IDE or extension.",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"repository": "https://github.com/codeadamca/vscode-livecode",
 	"engines": {
 		"vscode": "^1.50.0"
