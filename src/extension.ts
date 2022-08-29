@@ -49,16 +49,24 @@ async function resetLivecode() {
 
 	status.text = "$(sync~spin) LiveCode";
 	
-	const api = "https://livecode.codeadam.ca/api.php?reset";
+	const github = vscode.workspace.getConfiguration('livecode').githubUsername;
+	const api = "https://console.codeadam.ca/api/livecode/reset/";
 
-	await fetch(api);
+	const headers = {"Content-Type": "application/json"};
+	const body = JSON.stringify({
+		"github": github
+	});
+
+	await fetch(api, {method: 'POST', headers: headers, body: body});
 
 	vscode.window.showInformationMessage("LiveCode: Paths have been reset!");
 
-	if (livecodeStatus == "On")
+	if (livecodeStatus === "On")
 	{
 		status.text = "$(sync) LiveCode";
-	} else {
+	} 
+	else 
+	{
 		status.text = "$(sync-ignored) LiveCode";
 	}
 
@@ -66,7 +74,7 @@ async function resetLivecode() {
 
 async function updateLivecode() {
 	
-	if (livecodeStatus == "On")
+	if (livecodeStatus === "On")
 	{	
 
 		status.text = "$(sync~spin) LiveCode";
@@ -81,15 +89,15 @@ async function updateLivecode() {
 
 		const path = editor.document.uri.path;
 		const content = editor.document.getText();
-		const api = "https://console.codeadam.ca/api/livecode/";
+		const github = vscode.workspace.getConfiguration('livecode').githubUsername;
+		const api = "https://console.codeadam.ca/api/livecode/path/";
 
 		const headers = {"Content-Type": "application/json"};
 		const body = JSON.stringify({
 			"path": path,
 			"content": content,
-			"github": vscode.workspace.getConfiguration('livecode').githubUsername
-		  });
-		  
+			"github": github
+		});  
 
 		let response = await fetch(api, {method: 'POST', headers: headers, body: body});
 		const data = await response.json();
