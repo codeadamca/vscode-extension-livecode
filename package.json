@@ -33,7 +33,18 @@
 				"command": "livecode.reset",
 				"title": "LiveCode: Reset"
 			}
-		]
+		],
+		"configuration": {
+			"title": "LiveCode",
+			"properties": {
+				"livecode.githubUsername": {
+					"type": "string",
+					"default": null,
+					"scope": "application",
+					"description": "Your GitHub username. If left blank, your code will be assigned to an anonymous coder."
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

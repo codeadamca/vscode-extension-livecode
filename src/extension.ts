@@ -1,4 +1,4 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED='0'
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED='0'
 
 import fetch from 'node-fetch';
 import * as vscode from 'vscode';
@@ -17,7 +17,7 @@ export function activate({ subscriptions }: vscode.ExtensionContext) {
 
 		status.text = "$(sync) LiveCode";
 		livecodeStatus = "On";
-		vscode.window.showInformationMessage("LiveCode Message: LiveCode has been activated! ");
+		vscode.window.showInformationMessage("LiveCode Message: LiveCode has been activated! " + test);
 
 	});
 
@@ -86,7 +86,8 @@ async function updateLivecode() {
 		const headers = {"Content-Type": "application/json"};
 		const body = JSON.stringify({
 			"path": path,
-			"content": content
+			"content": content,
+			"github": vscode.workspace.getConfiguration('livecode').githubUsername
 		  });
 		  
 
