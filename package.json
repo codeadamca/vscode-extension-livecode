@@ -42,6 +42,12 @@
 					"default": null,
 					"scope": "application",
 					"description": "Your GitHub username. If left blank, your code will be assigned to an anonymous coder."
+				},
+				"livecode.displayName": {
+					"type": "string",
+					"default": null,
+					"scope": "application",
+					"description": "Name to display in the Code Viewer. If no name is provided, your GitHub username will be used."
 				}
 			}
 		}
