@@ -50,7 +50,7 @@ async function resetLivecode() {
 	status.text = "$(sync~spin) LiveCode";
 	
 	const github = vscode.workspace.getConfiguration('livecode').githubUsername;
-	const api = "https://console.codeadam.ca/api/livecode/reset/";
+	const api = "https://console.codeadam.ca/api/livecode/reset";
 
 	const headers = {"Content-Type": "application/json"};
 	const body = JSON.stringify({
@@ -90,17 +90,21 @@ async function updateLivecode() {
 		const path = editor.document.uri.path;
 		const content = editor.document.getText();
 		const github = vscode.workspace.getConfiguration('livecode').githubUsername;
-		const api = "https://console.codeadam.ca/api/livecode/path/";
+		const display = vscode.workspace.getConfiguration('livecode').displayName;
+		const api = "https://console.codeadam.ca/api/livecode/save";
 
 		const headers = {"Content-Type": "application/json"};
 		const body = JSON.stringify({
 			"path": path,
 			"content": content,
+			"display": display,
 			"github": github
 		});  
 
 		let response = await fetch(api, {method: 'POST', headers: headers, body: body});
 		const data = await response.json();
+
+		console.log(data);
 
 		vscode.window.showInformationMessage("LiveCode: Code has been updated!");
 
